@@ -1,29 +1,29 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-contract MetaCircle {
+contract Metacircle {
 
-    // Struct to represent a User
+    // Struct to represent a user
     struct User {
         address userAddress;
         string username;
         string bio;
     }
     
-    // Struct to represent a Post
+    // Struct to represent a post
     struct Post {
         uint postId;
         address author;
         string content;
         uint likes;
-        mapping(address => bool) likedBy;
-        uint[] commentIds;
+        mapping(address => bool) likedBy; // Mapping to track which users have liked the post
+        uint[] commentIds;  // Array to store comment IDs associated with the post
     }
 
-    // Struct to represent a Comment
+    // Struct to represent a comment
     struct Comment {
         uint commentId;
-        string authorUsername;
+        string authorUsername;  // Store the username of the commenter
         uint postId;
         string content;
     }
@@ -37,43 +37,26 @@ contract MetaCircle {
     uint public postCount;
     uint public commentCount;
 
-    // Function to create a new user
+    // User Registration
     function createUser(string memory _username, string memory _bio) public {
         require(bytes(users[msg.sender].username).length == 0, "User already exists.");
-        users[msg.sender] = User(msg.sender, _username, _bio);
+        users[msg.sender] = User(msg.sender, _username, YOUR_CODE_GOES_HERE); //ASSIGNMENT #1
     }
 
-    // Function to get the username of a user by their address
+    // Function to get the username from an account address
     function getUsername(address _userAddress) public view returns (string memory) {
         require(bytes(users[_userAddress].username).length != 0, "User does not exist.");
-        return users[_userAddress].username;
+        YOUR_CODE_GOES_HERE users[_userAddress].username; //ASSIGNMENT #2
     }
 
-    // Function to create a new post (logic to be defined)
-    function createPost(string memory _content) public {}
-
-    // Function to like a post (logic to be defined)
-    function likePost(uint _postId) public {}
-
-    // Function to unlike a post (logic to be defined)
-    function unlikePost(uint _postId) public {}
-
-    // Function to comment on a post (logic to be defined)
-    function commentOnPost(uint _postId, string memory _content) public {}
-
-    // Function to check if a post is liked by a user (logic to be defined)
-    function isPostLikedByUser(uint _postId, address _user) public view returns (bool) {}
-
-    // Function to check if a user is registered
-    function isUserRegistered(address _user) public view returns (bool) {
-        return bytes(users[_user].username).length != 0;
+    // Creating a post
+    function createPost(string memory _content) public {
+        require(bytes(users[msg.sender].username).length != 0, "User does not exist.");
+        postCount++;
+        Post storage newPost = posts[postCount];
+        newPost.postId = postCount;
+        newPost.author = msg.sender;
+        newPost.content = _content;
+        newPost.likes = YOUR_CODE_GOES_HERE; //ASSIGNMENT #3
     }
-
-    // Function to get the username of the author of a post (logic to be defined)
-    function getPostAuthorUsername(uint _postId) public view returns (string memory) {}
-
-    // Function to get all comments for a post (logic to be defined)
-    function getCommentsForPost(uint _postId) public view returns (Comment[] memory) {}
-
 }
-
