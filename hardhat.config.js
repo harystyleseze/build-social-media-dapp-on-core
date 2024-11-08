@@ -12,6 +12,7 @@ module.exports = {
     core_testnet: {
       url: "https://rpc.test.btcs.network",
       accounts: privateKey(),
+      gasPrice: 1000000000,
     },
   },
   solidity: {

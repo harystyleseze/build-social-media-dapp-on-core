@@ -40,13 +40,13 @@ contract Metacircle {
     // User Registration
     function createUser(string memory _username, string memory _bio) public {
         require(bytes(users[msg.sender].username).length == 0, "User already exists.");
-        users[msg.sender] = User(msg.sender, _username, YOUR_CODE_GOES_HERE); //ASSIGNMENT #1
+        users[msg.sender] = User(msg.sender, _username, _bio); //ASSIGNMENT #1
     }
 
     // Function to get the username from an account address
     function getUsername(address _userAddress) public view returns (string memory) {
         require(bytes(users[_userAddress].username).length != 0, "User does not exist.");
-        YOUR_CODE_GOES_HERE users[_userAddress].username; //ASSIGNMENT #2
+        return users[_userAddress].username; //ASSIGNMENT #2
     }
 
     // Creating a post
@@ -57,6 +57,6 @@ contract Metacircle {
         newPost.postId = postCount;
         newPost.author = msg.sender;
         newPost.content = _content;
-        newPost.likes = YOUR_CODE_GOES_HERE; //ASSIGNMENT #3
+        newPost.likes = 0; //ASSIGNMENT #3
     }
 }
